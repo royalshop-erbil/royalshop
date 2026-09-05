@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Shop - کاتالۆگی ئامێرەکانی ناوماڵ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #181818;
+            --accent-gold: #d4af37;
+            --light-gold: #f4e0a5;
+            --text-color: #ffffff;
+            --subtext-color: #aaaaaa;
+            --whatsapp-green: #25D366;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans Arabic', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding-bottom: 40px; }
+        header { background: linear-gradient(180deg, #1c1a14 0%, var(--bg-color) 100%); text-align: center; padding: 25px 15px 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        header h1 { color: var(--accent-gold); font-size: 2rem; font-weight: 800; letter-spacing: 1px; }
+        header p { color: var(--subtext-color); font-size: 0.9rem; margin-top: 5px; }
+        .search-container { max-width: 600px; margin: 20px auto 10px; padding: 0 15px; }
+        .search-input { width: 100%; padding: 12px 20px; background-color: #1a1a1a; border: 1px solid var(--accent-gold); border-radius: 25px; color: #fff; font-size: 1rem; outline: none; }
+        .categories-container { display: flex; overflow-x: auto; gap: 10px; padding: 15px; max-width: 900px; margin: 0 auto; white-space: nowrap; scrollbar-width: none; }
+        .categories-container::-webkit-scrollbar { display: none; }
+        .category-btn { background-color: #1a1a1a; color: var(--text-color); border: 1px solid #333; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-size: 0.95rem; }
+        .category-btn.active { background-color: var(--accent-gold); color: #000; font-weight: bold; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+        .product-card { background-color: var(--card-bg); border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-img { width: 100%; height: 150px; object-fit: cover; background-color: #222; }
+        .product-info { padding: 12px; text-align: right; }
+        .product-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
+        .product-price { font-size: 0.95rem; color: var(--light-gold); font-weight: bold; margin-bottom: 10px; }
+        .whatsapp-btn { display: block; background-color: var(--whatsapp-green); color: #fff; text-decoration: none; text-align: center; padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: bold; }
+        footer { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid #222; color: var(--subtext-color); font-size: 0.85rem; }
+        footer strong { color: var(--accent-gold); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ROYAL SHOP</h1>
+        <p>شاهانەترین ئامێرەکانی ناوماڵ - هەولێر</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="گەڕان بۆ ئامێرەکان (عەجانە، ئوتی...)" onkeyup="filterProducts()">
+    </div>
+
+    <div class="categories-container">
+        <button class="category-btn active" onclick="filterCategory('all', this)">هەموو بەرهەمەکان</button>
+        <button class="category-btn" onclick="filterCategory('ئوتی', this)">ئوتی</button>
+        <button class="category-btn" onclick="filterCategory('عەجانە', this)">عەجانە</button>
+        <button class="category-btn" onclick="filterCategory('عەسارە', this)">عەسارە</button>
+        <button class="category-btn" onclick="filterCategory('مەکینەی قاوە', this)">مەکینەی قاوە</button>
+        <button class="category-btn" onclick="filterCategory('گسک', this)">گسک</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+
+    <footer>
+        <p><strong>Royal Shop</strong> - هەولێر</p>
+        <p>پەیوەندی: 07504973235 | 07507284547</p>
+    </footer>
+
+    <script>
+        const whatsappNumber = "9647504973235";
+
+        const products = [
+            { id: 1, name: "عەجانەی هەویر ٥ لیتر", category: "عەجانە", price: "٤٥,٠٠٠ دینار", image: "https://via.placeholder.com/300x300/181818/d4af37?text=عەجانە" },
+            { id: 2, name: "مەکینەی قاوەی ئیسپڕێسۆ", category: "مەکینەی قاوە", price: "٦٥,٠٠٠ دینار", image: "https://via.placeholder.com/300x300/181818/d4af37?text=مەکینەی+قاوە" },
+            { id: 3, name: "ئوتی هەڵمی پرۆفێشناڵ", category: "ئوتی", price: "٢٥,٠٠٠ دینار", image: "https://via.placeholder.com/300x300/181818/d4af37?text=ئوتی" },
+            { id: 4, name: "عەسارەی میوەی فرێش", category: "عەسارە", price: "٣٥,٠٠٠ دینار", image: "https://via.placeholder.com/300x300/181818/d4af37?text=عەسارە" },
+            { id: 5, name: "گسکی کارەبایی ٢٠٠٠ واٹ", category: "گسک", price: "٥٥,٠٠٠ دینار", image: "https://via.placeholder.com/300x300/181818/d4af37?text=گسک" }
+        ];
+
+        let selectedCategory = 'all';
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            if (items.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: #888;">هیچ بەرهەمێک نەدۆزرایەوە</p>';
+                return;
+            }
+            items.forEach(product => {
+                const message = encodeURIComponent(`سڵاو Royal Shop، پرسیارم هەبوو دەربارەی: ${product.name}`);
+                const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-img">
+                    <div class="product-info">
+                        <div class="product-title">${product.name}</div>
+                        <div class="product-price">${product.price}</div>
+                        <a href="${waLink}" target="_blank" class="whatsapp-btn">داواکردن لە واتسئاپ</a>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => {
+                const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+                const matchesSearch = p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+            renderProducts(filtered);
+        }
+
+        function filterCategory(category, btnElement) {
+            selectedCategory = category;
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            filterProducts();
+        }
+
+        renderProducts(products);
+    </script>
+</body>
+</html>
