@@ -46,11 +46,13 @@
     </header>
 
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="گەڕان بۆ ئامێرەکان (عەجانە، ئووتی...)" oninput="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="گەڕان بۆ ئامێرەکان (عەجانە، بەفر شکێن...)" oninput="filterProducts()">
     </div>
 
     <div class="categories-container">
         <button class="category-btn active" onclick="filterCategory('all', this)">هەموو بەرهەمەکان</button>
+        <button class="category-btn" onclick="filterCategory('ice_crusher', this)">بەفر شکێن</button>
+        <button class="category-btn" onclick="filterCategory('ice_maker', this)">بەفر دروستکەر</button>
         <button class="category-btn" onclick="filterCategory('juicer', this)">عەسارە</button>
         <button class="category-btn" onclick="filterCategory('iron', this)">ئووتی</button>
         <button class="category-btn" onclick="filterCategory('mixer', this)">میکسەر</button>
@@ -84,7 +86,9 @@
 
         const products = [
             { id: 1, name: "ئووتی ڕاف ١٢١٥", price: "15$", category: "iron", image: "https://via.placeholder.com/300" },
-            { id: 2, name: "میکسەری دەستی", price: "18$", category: "mixer", image: "https://via.placeholder.com/300" }
+            { id: 2, name: "میکسەری دەستی", price: "18$", category: "mixer", image: "https://via.placeholder.com/300" },
+            { id: 3, name: "بەفر شکێنی کارەبایی", price: "25$", category: "ice_crusher", image: "https://via.placeholder.com/300" },
+            { id: 4, name: "ئامێری بەفر دروستکەر", price: "85$", category: "ice_maker", image: "https://via.placeholder.com/300" }
         ];
 
         let selectedCategory = 'all';
