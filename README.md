@@ -46,18 +46,20 @@
     </header>
 
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="گەڕان بۆ ئامێرەکان (عەجانە، ئووتی...)" oninput="filterProducts()">
+        <input type="text" id="searchInput" class="search-input" placeholder="گەڕان بۆ ئامێرەکان..." oninput="filterProducts()">
     </div>
 
     <div class="categories-container">
         <button class="category-btn active" onclick="filterCategory('all', this)">هەموو بەرهەمەکان</button>
-        <button class="category-btn" onclick="filterCategory('juicer', this)">عەسارە</button>
         <button class="category-btn" onclick="filterCategory('iron', this)">ئووتی</button>
+        <button class="category-btn" onclick="filterCategory('dough_mixer', this)">عەجانە</button>
+        <button class="category-btn" onclick="filterCategory('ice_crusher', this)">بەفر شکێن</button>
+        <button class="category-btn" onclick="filterCategory('ice_maker', this)">بەفر دروستکەر</button>
+        <button class="category-btn" onclick="filterCategory('juicer', this)">عەسارە</button>
         <button class="category-btn" onclick="filterCategory('mixer', this)">میکسەر</button>
         <button class="category-btn" onclick="filterCategory('meat_grinder', this)">مەکینەی گۆشت</button>
-        <button class="category-btn" onclick="filterCategory('air_fryer', this)">قەلایە</button>
+        <button class="category-btn" onclick="filterCategory('air_fryer', this)">قەلا</button>
         <button class="category-btn" onclick="filterCategory('vacuum', this)">گەسک</button>
-        <button class="category-btn" onclick="filterCategory('dough_mixer', this)">عەجانە</button>
         <button class="category-btn" onclick="filterCategory('coffee', this)">قاوە ساز</button>
         <button class="category-btn" onclick="filterCategory('rice_cooker', this)">ڕایس کوکەر</button>
         <button class="category-btn" onclick="filterCategory('chopper', this)">شکێنەر</button>
@@ -82,15 +84,55 @@
     <script>
         const whatsappNumber = "9647504973235";
 
+        function generateItems(prefix, count, category, label) {
+            let items = [];
+            for (let i = 1; i <= count; i++) {
+                items.push({
+                    id: prefix * 100 + i,
+                    name: `${label} مۆدێلی ${i}`,
+                    price: "0$",
+                    category: category,
+                    image: "https://i.ibb.co/example.jpg"
+                });
+            }
+            return items;
+        }
+
         const products = [
-            
+            ...generateItems(1, 20, "iron", "ئووتی"),
+            ...generateItems(2, 20, "dough_mixer", "عەجانە"),
+            ...generateItems(3, 20, "ice_crusher", "بەفر شکێن"),
+            ...generateItems(4, 20, "ice_maker", "بەفر دروستکەر"),
+            ...generateItems(5, 20, "juicer", "عەسارە"),
+            ...generateItems(6, 20, "mixer", "میکسەر"),
+            ...generateItems(7, 20, "meat_grinder", "مەکینەی گۆشت"),
+            ...generateItems(8, 20, "air_fryer", "قەلا"),
+            ...generateItems(9, 20, "vacuum", "گەسک"),
+            ...generateItems(10, 20, "coffee", "قاوە ساز"),
+            ...generateItems(11, 20, "rice_cooker", "ڕایس کوکەر"),
+            ...generateItems(12, 20, "chopper", "شکێنەر"),
+            ...generateItems(13, 20, "toaster", "جیهازی تۆست"),
+            ...generateItems(14, 20, "laser_stove", "تەباخی لێزەری"),
+            ...generateItems(15, 20, "scale", "تەرازوو"),
+            ...generateItems(16, 20, "egg_cooker", "جیهازی هێلکە"),
+            ...generateItems(17, 20, "shaver", "جیهازی شەندەری"),
+            ...generateItems(18, 20, "oven", "فرن"),
+            ...generateItems(19, 20, "mixer_set", "سێت میکسەر"),
+            ...generateItems(20, 20, "hair_dryer", "مجەففە"),
+            ...generateItems(21, 20, "kettle", "کتلی")
         ];
 
-        
+        let selectedCategory = 'all';
 
         function renderProducts(items) {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
+            
+            if (items.length === 0) {
+                grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: #888; padding: 40px 0;">هیچ بەرهەمێک نەدۆزرایەوە.</p>';
+                return;
+            }
+
             items.forEach(product => {
                 const message = encodeURIComponent(`سڵاو، داوای ئەم بەرهەمە دەکەم:\n\n*${product.name}*\nنرخ: ${product.price}`);
                 const waLink = `https://wa.me/${whatsappNumber}?text=${message}`;
