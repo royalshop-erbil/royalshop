@@ -55,7 +55,7 @@
         <button class="category-btn" onclick="filterCategory('iron', this)">ئووتی</button>
         <button class="category-btn" onclick="filterCategory('mixer', this)">میکسەر</button>
         <button class="category-btn" onclick="filterCategory('meat_grinder', this)">مەکینەی گۆشت</button>
-        <button class="category-btn" onclick="filterCategory('air_fryer', this)"></button>
+        <button class="category-btn" onclick="filterCategory('air_fryer', this)">قەلایە</button>
         <button class="category-btn" onclick="filterCategory('vacuum', this)">گەسک</button>
         <button class="category-btn" onclick="filterCategory('dough_mixer', this)">عەجانە</button>
         <button class="category-btn" onclick="filterCategory('coffee', this)">قاوە ساز</button>
