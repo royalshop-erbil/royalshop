@@ -83,7 +83,7 @@
         const whatsappNumber = "9647504973235";
 
         const products = [
-            { id: 1, name: "ئووتی ڕاف ١٢١٥", price: "15$", category: "iron", image: "https://via.placeholder.com/300" },
+            
             { id: 2, name: "میکسەری دەستی", price: "18$", category: "mixer", image: "https://via.placeholder.com/300" }
         ];
 
