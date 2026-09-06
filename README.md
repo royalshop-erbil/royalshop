@@ -84,10 +84,9 @@
 
         const products = [
             
-            { id: 2, name: "میکسەری دەستی", price: "18$", category: "mixer", image: "https://via.placeholder.com/300" }
         ];
 
-        let selectedCategory = 'all';
+        
 
         function renderProducts(items) {
             const grid = document.getElementById('productsGrid');
