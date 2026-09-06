@@ -135,4 +135,37 @@
     </script>
 </body>
 </html>
-{ id: 1, name: "مجەفەی سۆکانی ١٠٠٢
+{ d:        const products = [
+            ...generateItems(1, 20, "iron", "ئووتی"),
+            ...generateItems(2, 20, "dough_mixer", "عەجانە"),
+            ...generateItems(3, 20, "ice_crusher", "بەفر شکێن"),
+            ...generateItems(4, 20, "ice_maker", "بەفر دروستکەر"),
+            ...generateItems(5, 20, "juicer", "عەسارە"),
+            
+            // بەشی میکسەر: یەکەم دانە وێنەی Kenwood دەبێت
+            {
+                id: 601,
+                name: "میکسەری Kenwood",
+                price: "0$",
+                category: "mixer",
+                image: "https://i.ibb.co/C3T4m0f1/37919.jpg"
+            },
+            ...generateItems(6, 19, "mixer", "میکسەر"),
+            
+            ...generateItems(7, 20, "meat_grinder", "مەکینەی گۆشت"),
+            ...generateItems(8, 20, "air_fryer", "قەلا"),
+            ...generateItems(9, 20, "vacuum", "گەسک"),
+            ...generateItems(10, 20, "coffee", "قاوە ساز"),
+            ...generateItems(11, 20, "rice_cooker", "ڕایس کوکەر"),
+            ...generateItems(12, 20, "chopper", "شکێنەر"),
+            ...generateItems(13, 20, "toaster", "جیهازی تۆست"),
+            ...generateItems(14, 20, "laser_stove", "تەباخی لێزەری"),
+            ...generateItems(15, 20, "scale", "تەرازوو"),
+            ...generateItems(16, 20, "egg_cooker", "جیهازی هێلکە"),
+            ...generateItems(17, 20, "shaver", "جیهازی شەندەری"),
+            ...generateItems(18, 20, "oven", "فرن"),
+            ...generateItems(19, 20, "mixer_set", "سێت میکسەر"),
+            ...generateItems(20, 20, "hair_dryer", "مجەففە"),
+            ...generateItems(21, 20, "kettle", "کتلی")
+        ];
+
